@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login</title>
+    <style>
+      h2{
+        color:rgb(181, 40, 40);
+        font-size:5em;
+        text-align: center;
+      }
+      form{
+        width:40%;
+        font-size: 40px;;
+        color:rgb(148, 46, 46);
+        padding:15px;
+        border:2px solid rgb(148, 46, 46);
+        box-shadow:0 3px 10px rgb(148, 46, 46);
+        margin:auto;
+        border-radius: 5px;;
+        
+      }
+      input{
+        width:60%;
+        padding:10px;
+        font-size: 1rem;
+        border: 2px solid rgb(148, 46, 46);
+      }
+      button{
+        width:100%;
+        font-size:2rem;
+        border-radius:5px;
+        padding:10px;
+        color:rgb(148, 46, 46);
+        background-color: whitesmoke;
+        border: 2px solid rgb(148, 46, 46);
+      }
+      button:hover{
+        font-size:1.9rem;
+         box-shadow:0 3px 10px rgb(148, 46, 46);
+      }
+    </style>
+</head>
+<body>
+    <h2>Login</h2>
+    <form method="POST">
+        <label>Username:</label>
+        <input type="text" name="username" required><br><br>
+        <label>Password:</label>
+        <input type="password" name="password" required><br><br>
+        <button type="submit">Login</button>
+    </form>
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <ul>
+        {% for message in messages %}
+          <li style="color: red;">{{ message }}</li>
+        {% endfor %}
+        </ul>
+      {% endif %}
+    {% endwith %}
+</body>
+</html>

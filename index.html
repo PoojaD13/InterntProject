@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Resume Ranker</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+    <h1>AI Resume Ranker</h1>
+
+    <form method="POST" enctype="multipart/form-data">
+        <label>Upload Job Description PDF:</label>
+        <input type="file" name="job_description_file" required accept=".pdf">
+
+        <label>Upload Resume PDFs:</label>
+        <input type="file" name="resumes" multiple required accept=".pdf">
+
+        <button type="submit">Rank Resumes</button>
+    </form>
+
+    {% if results %}
+    <div class="results">
+        <h2>Ranked Candidates</h2>
+        <table>
+            <tr>
+                <th>File Name</th>
+                <th>Candidate Name</th>
+                <th>Email</th>
+                <th>Score</th>
+                <th>Matched Keywords</th>
+            </tr>
+            {% for file, name, email, score, keywords in results %}
+            <tr>
+                <td>{{ file }}</td>
+                <td>{{ name }}</td>
+                <td>{{ email }}</td>
+                <td>{{ score }}</td>
+                <td>{{ keywords }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+
+        {% if report_generated %}
+        <a href="/download"><button>Download HR Report (CSV)</button></a>
+        {% endif %}
+    </div>
+    {% endif %}
+    <p>Logged in as: {{ session['username'] }} | <a href="{{ url_for('logout') }}">Logout</a></p>
+
+</body>
+</html>

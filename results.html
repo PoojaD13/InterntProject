@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Resume Ranking Results</title>
+</head>
+<body>
+    <h2>Ranked Resumes</h2>
+    <table border="1">
+        <tr>
+            <th>File Name</th>
+            <th>Candidate Name</th>
+            <th>Email</th>
+            <th>Score</th>
+        </tr>
+        {% for filepath, score in ranked_resumes %}
+        <tr>
+            <td>{{ filepath.split('/')[-1] }}</td>
+            <td>{{ extract_name(extract_text_from_pdf(filepath)) }}</td>
+            <td>{{ extract_email(extract_text_from_pdf(filepath)) }}</td>
+            <td>{{ "%.4f"|format(score) }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <h3>Visual Chart</h3>
+    <img src="{{ url_for('static', filename='score_chart.png') }}" alt="Score Chart">
+</body>
+</html>
